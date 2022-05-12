@@ -30,7 +30,7 @@ class Random_UA {
      */
     public static function getCategories()
     {
-        return self::getField('deviceCategory');
+        return self::getField('category');
     }
 	
 	/**
@@ -73,10 +73,9 @@ class Random_UA {
     {
         // Components of $filterBy that will not be ignored
         $filterParams = [
-            'vendor',
             'platform',
-            'userAgent',
-            'deviceCategory',
+            'agent',
+            'category',
         ];
 
         $outputFilter = [];
@@ -109,7 +108,7 @@ class Random_UA {
                     continue 2;
                 }
             }
-            $agentStrings[] = self::$agentsList[$i]['userAgent'];
+            $agentStrings[] = self::$agentsList[$i]['agent'];
         }
 
         return array_values($agentStrings);
