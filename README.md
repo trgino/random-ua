@@ -25,19 +25,19 @@ $rand_ua = Random_UA::random();
 /* or */
 
 $rand_ua = Random_UA::random([
-	'deviceCategory' => 'desktop',
+	'category' => 'desktop',
 ]);
 
 /* or */
 
 $rand_ua = Random_UA::random([
-	'deviceCategory' => ['desktop','tablet'],
+	'category' => ['desktop','tablet'],
 ]);
 
 /* or */
 
 $rand_ua = Random_UA::random([
-	'deviceCategory' => ['desktop','mobile'],
+	'category' => ['desktop','mobile'],
 	'platform' => 'Win32',
 ]);
 
