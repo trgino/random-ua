@@ -4,17 +4,8 @@ namespace RandomAgent;
 class Random_UA {
  
     private static $agentsList = [];
-	
-    /**
-     * Get a random user agent from agents list
-     *
-     * @param  array $filterBy
-     * @return string
-     * @throws \Exception
-     */
-	
-    public static function random($filterBy = [])
-    {
+
+    public static function random($filterBy = []) {
         $agents = self::loadUserAgents($filterBy);
 
         if (empty($agents)) {
@@ -24,32 +15,19 @@ class Random_UA {
         return $agents[mt_rand(0, count($agents) - 1)];
     }
 
-    /**
-     * Get all of the unique values of the deviceCategory field, which can be used for filtering
-     * @return array
-     */
-    public static function getCategories()
-    {
+    public static function getCategories() {
         return self::getField('category');
     }
-	
-	/**
-     * Get all of the unique values of the platform field, which can be used for filtering
-     * @return array
-     */
-    public static function getPlatforms()
-    {
+
+    public static function getPlatforms() {
         return self::getField('platform');
     }
+    
+    public static function getVendors() {
+        return self::getField('vendor');
+    }
 
-    /**
-     * This is a helper for the publicly-exposed methods named get...()
-     * @param  string $fieldName
-     * @return array
-     * @throws \Exception
-     */
-    private static function getField($fieldName)
-    {
+    private static function getField($fieldName) {
 		self::loadAgentsList();
         $values       = [];
         foreach (self::$agentsList as $agent) {
@@ -63,18 +41,11 @@ class Random_UA {
         return array_values(array_unique($values));
     }
 
-    /**
-     * Validates the filter so that no unexpected values make their way through
-     *
-     * @param array $filterBy
-     * @return array
-     */
-    private static function validateFilter($filterBy = [])
-    {
-        // Components of $filterBy that will not be ignored
+    private static function validateFilter($filterBy = []) {
+
         $filterParams = [
             'platform',
-            'agent',
+            'vendor',
             'category',
         ];
 
@@ -89,14 +60,7 @@ class Random_UA {
         return $outputFilter;
     }
 
-    /**
-     * Returns an array of user agents that match a filter if one is provided
-     *
-     * @param array $filterBy
-     * @return array
-     */
-    private static function loadUserAgents($filterBy = [])
-    {
+    private static function loadUserAgents($filterBy = []) {
 		self::loadAgentsList();
         $filterBy = self::validateFilter($filterBy);
 
@@ -114,23 +78,11 @@ class Random_UA {
         return array_values($agentStrings);
     }
 
-    /**
-     * return if key exist in array of filters
-     *
-     * @param  $key
-     * @param  $array
-     * @return bool
-     */
-    private static function inFilter($key, $array)
-    {
+    private static function inFilter($key, $array) {
         return in_array(strtolower($key), array_map('strtolower', (array) $array));
     }
 
-    /**
-     * @return array
-     */
-    private static function loadAgentsList()
-    {
+    private static function loadAgentsList() {
 		if(!self::$agentsList){
 			if (file_exists(__DIR__ . '/useragents.json')) {
 				self::$agentsList = json_decode(file_get_contents(__DIR__ . '/useragents.json'), true);

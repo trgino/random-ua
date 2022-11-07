@@ -4,22 +4,24 @@ require_once __DIR__.'/vendor/autoload.php';
 
 print_r(Random_UA::getCategories());
 print_r(Random_UA::getPlatforms());
+print_r(Random_UA::getVendors());
 
 $rand = Random_UA::random([
-	'deviceCategory' => 'desktop',
+	'category' => 'desktop',
 ]);
-echo 'deviceCategory: desktop - '.$rand.PHP_EOL;
-
-
-$rand = Random_UA::random([
-	'deviceCategory' => ['desktop','tablet'],
-]);
-echo 'deviceCategory: desktop,tablet - '.$rand.PHP_EOL;
+echo 'category: desktop - '.$rand.PHP_EOL;
 
 
 $rand = Random_UA::random([
-	'deviceCategory' => ['desktop','tablet'],
-	'platform' => 'Win32',
+	'category' => ['desktop'],
+	'platform' => ['Windows','Mac'],
 ]);
-echo 'deviceCategory: desktop,tablet & platform: Win32 - '.$rand.PHP_EOL;
+echo 'category: desktop  & platform: Window & Mac - '.$rand.PHP_EOL;
+
+$rand = Random_UA::random([
+	'category' => ['desktop'],
+	'platform' => ['Windows','Mac'],
+	'vendor' => ['Chrome'],
+]);
+echo 'category: desktop  & platform: Window & Mac - '.$rand.PHP_EOL;
 

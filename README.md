@@ -31,14 +31,24 @@ $rand_ua = Random_UA::random([
 /* or */
 
 $rand_ua = Random_UA::random([
-	'category' => ['desktop','tablet'],
+	'category' => ['desktop'],
 ]);
 
 /* or */
 
 $rand_ua = Random_UA::random([
-	'category' => ['desktop','mobile'],
-	'platform' => 'Win32',
+	'category' => ['desktop'],
+	'platform' => ['windows','mac'],
+]);
+
+```
+
+/* or */
+
+$rand_ua = Random_UA::random([
+	'category' => ['desktop'],
+	'platform' => ['windows','mac'],
+	'vendor' => ['chrome'],
 ]);
 
 ```
@@ -54,8 +64,6 @@ print_r(Random_UA::getCategories());
 Array
 (
     [0] => desktop
-    [1] => mobile
-    [2] => tablet
 )
 */
 ```
@@ -71,16 +79,8 @@ print_r(Random_UA::getPlatforms());
 /*
 Array
 (
-    [0] => Win32
-    [1] => MacIntel
-    [2] => Linux x86_64
-    [3] => iPhone
-    [4] => Linux armv8l
-    [5] => Linux aarch64
-    [6] => Linux armv7l
-    [7] => Linux armv81
-    [8] => Pike v8.0 release 610
-    [9] => iPad
+    [0] => Windows
+    [1] => Mac
 )
 */
 ```
